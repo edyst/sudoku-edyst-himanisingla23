@@ -145,7 +145,7 @@ function validateRow(arg){
             }
         } 
     }
-    return true
+    return true;
 }
 
 function validateCol(arg){
@@ -199,7 +199,7 @@ function validateBox()
             }
         } 
     }
-    return true
+    return true;
 
 }
 
