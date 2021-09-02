@@ -34,6 +34,7 @@ const HARD = [
 
 
 // declarions
+
 const easy_btn = document.getElementById("difi-1");
 const medium_btn = document.getElementById("difi-2");
 const hard_btn = document.getElementById("difi-3");
@@ -49,6 +50,7 @@ for(var i=0;i<81;i++){
         inputs_arr.push(row);
         row = [];
     }
+   
 }
 
 
@@ -59,6 +61,30 @@ medium_btn.addEventListener('click',() =>{createBoard(MEDIUM)});
 hard_btn.addEventListener('click',() =>{createBoard(HARD)});
 validate_btn.addEventListener('click', validate);
 window.onload = ()=>{createBoard(EASY)};
+
+for(var i=0;i<81;i++){
+
+    query[i].addEventListener("input",(e) =>{
+        if(!parseInt(e.data) )
+        e.target.value = "";
+     
+    })
+    
+
+    query[i].addEventListener('focus',(e)=>{
+      var row = e.target.dataset.row;
+      var col = e.target.dataset.col;
+      var box =   e.target.dataset.box;
+        for(var j=0;j<81;j++){
+            if(query[j].dataset.row === row || query[j].dataset.col === col || query[j].dataset.box == box ){
+                query[j].classList.add("hover");
+            }
+            else{
+                query[j].classList.remove("hover");
+            }   
+        }
+    })
+}
 
 
 // functions....
@@ -96,12 +122,14 @@ function validate(){
     }
 
     if(validateRow(value_array)){
-        validateCol(value_array);
-    }
-    // else if(validateCol(value_array)){
-    //     validateBox(value_array);
-    // }
+        if(validateCol(value_array)){
+            if(validateBox()){
+                alert("Congratulations!!!");
+            }
+        } 
+    }  
 }
+
 
 function validateRow(arg){
     for(var i=0;i<9;i++){
@@ -138,6 +166,41 @@ function validateCol(arg){
         }
     }
     return true
+}
+
+function validateBox()
+{
+    var boxArr = [
+        [inputs_arr[0][0],inputs_arr[0][1],inputs_arr[0][2],inputs_arr[1][0],inputs_arr[1][1],inputs_arr[1][2],inputs_arr[2][0],inputs_arr[2][1],inputs_arr[2][2]],
+        [inputs_arr[0][3],inputs_arr[0][4],inputs_arr[0][5],inputs_arr[1][3],inputs_arr[1][4],inputs_arr[1][5],inputs_arr[2][3],inputs_arr[2][4],inputs_arr[2][5]],
+        [inputs_arr[0][6],inputs_arr[0][7],inputs_arr[0][8],inputs_arr[1][6],inputs_arr[1][7],inputs_arr[1][8],inputs_arr[2][6],inputs_arr[2][7],inputs_arr[2][8]],
+        [inputs_arr[3][0],inputs_arr[3][1],inputs_arr[3][2],inputs_arr[4][0],inputs_arr[4][1],inputs_arr[4][2],inputs_arr[5][0],inputs_arr[5][1],inputs_arr[5][2]],
+        [inputs_arr[3][3],inputs_arr[3][4],inputs_arr[3][5],inputs_arr[4][3],inputs_arr[4][4],inputs_arr[4][5],inputs_arr[5][3],inputs_arr[5][4],inputs_arr[5][5]],
+        [inputs_arr[3][6],inputs_arr[3][7],inputs_arr[3][8],inputs_arr[4][6],inputs_arr[4][7],inputs_arr[4][8],inputs_arr[5][6],inputs_arr[5][7],inputs_arr[5][8]],
+        [inputs_arr[6][0],inputs_arr[6][1],inputs_arr[6][2],inputs_arr[7][0],inputs_arr[7][1],inputs_arr[7][2],inputs_arr[8][0],inputs_arr[8][1],inputs_arr[8][2]],
+        [inputs_arr[6][3],inputs_arr[6][4],inputs_arr[6][5],inputs_arr[7][3],inputs_arr[7][4],inputs_arr[7][5],inputs_arr[8][3],inputs_arr[8][4],inputs_arr[8][5]],
+        [inputs_arr[6][6],inputs_arr[6][7],inputs_arr[6][8],inputs_arr[7][6],inputs_arr[7][7],inputs_arr[7][8],inputs_arr[8][6],inputs_arr[8][7],inputs_arr[8][8]]
+    ];
+    
+    for(var i=0;i<9;i++){
+        var temp = [];
+        for(x=0;x<9;x++){
+            temp.push(boxArr[x][i].value);
+        }
+        
+        for(var j=0;j<9;j++){
+            temp.shift()
+    
+            var index=temp.indexOf(boxArr[i][j].value)
+            if( index !== -1){
+                boxArr[i][j].classList.add('input_color');
+                boxArr[i][j+1+index].classList.add('input_color');
+                return false; 
+            }
+        } 
+    }
+    return true
+
 }
 
 

@@ -18,18 +18,26 @@ body{
 #difi-1 , #difi-2 , #difi-3{
     margin:14px 50px;
     font-size:13px;
+    font-weight:500;
     width:63px;
     height:33px;
 }
+#difi-1:hover , #difi-2:hover , #difi-3:hover{
+    border:3px solid #B8DFD8;
+    font-weight: bolder;
+}
+
 #content-div{
     width:100%;
     margin-top:14px;
-    padding:1% 35%;
+    
+    
    
 }
 table{
     border: 1px solid #344861 ;
     border-collapse: collapse;
+    margin:auto;
 }
 
 td{
@@ -112,6 +120,19 @@ input{
     text-align: center;
     font-size:16px;
 }
+#validate-btn:hover{
+    font-size: 20px;
+    font-weight:500;
+    border:2px solid #000000;
+}
 .input_color{
     background-color: red !important;
+}
+
+.hover{
+    background-color: #dce6e4 !important; 
+}
+
+input:hover{
+    background-color: #B8DFD8 !important;
 }
