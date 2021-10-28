@@ -33,6 +33,7 @@ const HARD = [
 ]
 
 
+
 // declarions
 
 const easy_btn = document.getElementById("difi-1");
@@ -52,8 +53,6 @@ for(var i=0;i<81;i++){
     }
    
 }
-
-
 
 // event listener
 easy_btn.addEventListener('click',() =>{createBoard(EASY)});
